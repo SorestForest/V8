@@ -35,8 +35,6 @@ public class BoxCollider extends Component {
 
     }
 
-
-
     @Override
     public void init() throws IOException {
         if (parent instanceof CollisionDetection){
