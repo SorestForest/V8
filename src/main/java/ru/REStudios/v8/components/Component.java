@@ -38,7 +38,8 @@ public abstract class Component {
     public final void requiredComponent(Class<? extends Component> component){
         dependencies.add(component);
     }
-    
+
+
     final boolean validateDependencies(ArrayList<Component> objectComponents) {
 
         int length = (int) objectComponents.stream().map(Component::getClass).takeWhile(dependencies::contains).count();

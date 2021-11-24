@@ -3,7 +3,6 @@ package ru.REStudios.v8.components.custom.physics;
 import ru.REStudios.v8.components.Component;
 import ru.REStudios.v8.components.GameObject;
 
-import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 
 /**
@@ -23,10 +22,6 @@ public class BoxCollider extends Collider {
         this.trigger = trigger;
     }
 
-
-    private Rectangle2D.Float rectangle2D;
-    private CollisionDetection parentInstance;
-
     @Override
     public void render() {}
 
@@ -37,13 +32,7 @@ public class BoxCollider extends Collider {
 
     @Override
     public void init() throws IOException {
-        if (parent instanceof CollisionDetection){
-            parentInstance = (CollisionDetection) parent;
 
-        } else { disable(); }
-        if (parentInstance != null){
-            rectangle2D = new Rectangle2D.Float(getTransform().position.x,getTransform().position.y,getTransform().size.x,getTransform().size.y);
-        }
     }
 
     public interface CollisionDetection {
