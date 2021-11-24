@@ -43,9 +43,11 @@ public abstract class GameObject {
     }
 
     public void init() throws IOException {
+        validateComponents();
         for (Component component : components) {
             component.init();
         }
+
     }
 
     public void update(double dt){

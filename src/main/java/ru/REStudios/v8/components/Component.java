@@ -1,9 +1,12 @@
 package ru.REStudios.v8.components;
 
 import ru.REStudios.v8.components.custom.Transform;
+import ru.REStudios.v8.components.custom.physics.Rigidbody;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * (C) Copyright REStudios 2021
@@ -37,26 +40,21 @@ public abstract class Component {
     }
     
     final boolean validateDependencies(ArrayList<Component> objectComponents) {
-        boolean find = false;
-        for (Class<? extends Component> dependency : dependencies) {
-            for (Component objectComponent : objectComponents) {
-                if (dependency.equals(objectComponent.getClass())){
-                    find = true;
-                    break;
-                }
-            }
-            if (!find){
-                disable();
-                break;
-            }
+
+        int length = (int) objectComponents.stream().map(Component::getClass).takeWhile(dependencies::contains).count();
+        if (this instanceof Rigidbody){
+
+            System.out.println(objectComponents.stream().map(Component::getClass).takeWhile(dependencies::contains).collect(Collectors.toUnmodifiableList()));
+            System.out.println("find length: "+length);
+            System.out.println("deps length: "+dependencies.size());
         }
-        if (dependencies.size() == 0){
-            return true;
-        }
-        return find;
+        enabled = length == dependencies.size();
+        return enabled;
+
     }
 
     public Transform getTransform(){
         return parent.getTransform();
     }
+
 }

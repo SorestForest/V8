@@ -11,7 +11,7 @@ import java.io.IOException;
  *
  * @author REStudios
  */
-public class BoxCollider extends Component {
+public class BoxCollider extends Collider {
 
     public BoxCollider(){
         this(false);
