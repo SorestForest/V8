@@ -1,4 +1,4 @@
-package ru.REStudios.v8.components.custom;
+package ru.REStudios.v8.components.custom.graphics;
 
 import ru.REStudios.v8.components.Component;
 import ru.REStudios.v8.graphics.Renderer;
