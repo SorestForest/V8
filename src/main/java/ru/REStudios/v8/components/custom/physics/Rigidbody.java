@@ -7,7 +7,6 @@ import ru.REStudios.v8.math.Physic;
 
 import java.io.IOException;
 import java.util.Objects;
-import java.util.Vector;
 
 public class Rigidbody extends Component {
     // PHYSICS
