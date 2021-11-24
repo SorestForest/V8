@@ -36,9 +36,9 @@ public class FileHandle {
      * @param path to file. relative or full
      */
     public FileHandle(String path){
-        this.file = new File(path);
-        this.relativePath = asRelative(path);
-        this.fullPath = asFull(path);
+        this.file = new File(path.replace("/","\\"));
+        this.relativePath = asRelative(path.replace("/","\\"));
+        this.fullPath = asFull(path.replace("/","\\"));
     }
 
     public static String[] getPaths(String unknownPath){
