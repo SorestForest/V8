@@ -35,7 +35,8 @@ public abstract class Component {
     public final void requiredComponent(Class<? extends Component> component){
         dependencies.add(component);
     }
-    
+
+
     final boolean validateDependencies(ArrayList<Component> objectComponents) {
         boolean find = false;
         for (Class<? extends Component> dependency : dependencies) {
