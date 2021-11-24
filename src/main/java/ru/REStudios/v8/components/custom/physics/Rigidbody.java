@@ -34,10 +34,9 @@ public class Rigidbody extends Component {
     @Override
     public void update(double dt) {
         Physic.F f = new Physic.F(m);
-        System.out.println(f);
         Vector2f position = new Vector2f(parent.getTransform().position);
         // ATTRACTION
-        position.add(f.getDirection().mul(new Vector2f((float)f.getImpulse(), (float)f.getImpulse())));
+        position.add(f.getDirection().mul(new Vector2f((float)f.getImpulse(), (float)f.getImpulse())).mul(1, -1));
 
 
         ((Transform) Objects.requireNonNull(parent.getComponent(Transform.class))).position = position;

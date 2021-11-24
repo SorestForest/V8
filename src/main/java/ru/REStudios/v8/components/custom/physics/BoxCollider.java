@@ -22,13 +22,7 @@ public class BoxCollider extends Collider {
         this.trigger = trigger;
     }
 
-    @Override
-    public void render() {}
 
-    @Override
-    public void update(double dt) {
-
-    }
 
     @Override
     public void init() throws IOException {

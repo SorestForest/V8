@@ -14,9 +14,11 @@ public class TestGameObject extends GameObject {
 
     public TestGameObject(){
         addComponent(new BoxCollider());
-        addComponent(new Transform(new Vector2f(-0.8f,-0.8f),new Vector2f(1,1)));
+        addComponent(new Transform(new Vector2f(0,0),new Vector2f(1000,1000)));
         addComponent(new Sprite("v8.png"));
-        addComponent(new Rigidbody());
+        addComponent(new Rigidbody(){{
+            setMass(0.001);
+        }});
     }
 
 

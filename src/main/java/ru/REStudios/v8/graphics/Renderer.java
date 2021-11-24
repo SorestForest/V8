@@ -1,5 +1,6 @@
 package ru.REStudios.v8.graphics;
 
+import org.joml.Vector2f;
 import org.joml.Vector4f;
 
 import java.awt.Color;
@@ -21,6 +22,9 @@ public class Renderer {
     public static void v8Begin(int render){
         glBegin(render);
         rendering = true;
+    }
+    public static void v8Vertex(Vector2f point){
+        glVertex2f(point.x, point.y);
     }
 
     public static void v8End(){
@@ -53,13 +57,13 @@ public class Renderer {
         glActiveTexture(GL_TEXTURE_2D);
         texture.bind();
 
-        glTexCoord2f(1,1);
-        glVertex2f(vec.x,vec.y);
-        glTexCoord2f(0,1);
-        glVertex2f(vec.x+vec.z,vec.y);
         glTexCoord2f(0,0);
-        glVertex2f(vec.x+vec.z,vec.y+vec.w);
+        glVertex2f(vec.x,vec.y);
         glTexCoord2f(1,0);
+        glVertex2f(vec.x+vec.z,vec.y);
+        glTexCoord2f(1,1);
+        glVertex2f(vec.x+vec.z,vec.y+vec.w);
+        glTexCoord2f(0,1);
         glVertex2f(vec.x,vec.y+vec.w);
 
 

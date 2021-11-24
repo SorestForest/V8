@@ -1,5 +1,6 @@
 package ru.REStudios.v8.graphics;
 
+import org.joml.Vector2f;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 import ru.REStudios.v8.utils.Time;
@@ -112,12 +113,16 @@ public class Window {
         // Make the window visible
         glfwShowWindow(windowHandle);
 
-        // This line is critical for LWJGL's interoperation with GLFW's
-        // OpenGL context, or any context that is managed externally.
-        // LWJGL detects the context that is current in the current thread,
-        // creates the GLCapabilities instance and makes the OpenGL
-        // bindings available for use.
+
+
         GL.createCapabilities();
+
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        Vector2f position = new Vector2f(10, 10);
+        glOrtho(0+position.x, width+position.x, height+position.y, 0+position.y, 1, -1);
+        glMatrixMode(GL_MODELVIEW);
+
         ready = true;
         try {
             currentScene.init();
@@ -130,6 +135,7 @@ public class Window {
         float beginTime = Time.getTime();
         float endTime;
         float dt = -1.0f;
+        float last = 0;
         glEnable(GL_TEXTURE_2D);
         while (!glfwWindowShouldClose(windowHandle)){
             // Poll events
@@ -149,6 +155,7 @@ public class Window {
             if (currentScene != null) {
                 currentScene.render();
             }
+
 
             glfwSwapBuffers(windowHandle);
 
