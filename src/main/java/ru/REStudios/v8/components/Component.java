@@ -1,7 +1,6 @@
 package ru.REStudios.v8.components;
 
 import ru.REStudios.v8.components.custom.Transform;
-import ru.REStudios.v8.components.custom.physics.Rigidbody;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,13 +42,7 @@ public abstract class Component {
 
     final boolean validateDependencies(ArrayList<Component> objectComponents) {
         List<Class<? extends Component>> classes = objectComponents.stream().map(Component::getClass).collect(Collectors.toList());
-        if (this instanceof Rigidbody){
-            System.out.println(classes);
-            System.out.println(dependencies);
-        }
-        boolean find = containsAll(classes);
-        System.out.println(find);
-        enabled = find;
+        enabled = containsAll(classes);
         return enabled;
 
     }
