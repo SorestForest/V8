@@ -3,9 +3,11 @@ package ru.REStudios.v8.graphics;
 import org.joml.Vector2f;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
+import ru.REStudios.v8.components.custom.InputReceiver;
 import ru.REStudios.v8.utils.Time;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
@@ -30,7 +32,9 @@ public class Window {
         this.vsync = vsync;
         this.title = title;
     }
-
+    public static Scene getCurrentScene(){
+        return currentScene;
+    }
     public static Window get(){
         if (window == null) {
             throw new IllegalStateException("Initialization first!");
@@ -48,8 +52,7 @@ public class Window {
 
     private static boolean ready = false;
 
-    public static Scene setScene(Scene toSet){
-        Scene temp = currentScene;
+    public static void setScene(Scene toSet){
         currentScene = toSet;
         if (ready){
             try {
@@ -58,7 +61,6 @@ public class Window {
                 e.printStackTrace();
             }
         }
-        return temp;
     }
 
 
@@ -70,6 +72,12 @@ public class Window {
 
     public boolean shouldClose(){
         return glfwWindowShouldClose(windowHandle);
+    }
+
+    public void waitFor(){
+        //noinspection StatementWithEmptyBody
+        while (!shouldClose()){
+        }
     }
 
     public void run(){
@@ -91,7 +99,7 @@ public class Window {
         // Setup an error callback
         GLFWErrorCallback.createPrint(System.err).set();
         if (!glfwInit()){
-            throw new IllegalStateException("GLFW say: stfu");
+            throw new IllegalStateException("Can't init GLFW");
         }
 
         // Configure GLFW
@@ -113,7 +121,11 @@ public class Window {
         // Make the window visible
         glfwShowWindow(windowHandle);
 
-
+        glfwSetKeyCallback(windowHandle, (long window, int key, int scancode, int action, int mods) -> {
+            for (InputReceiver inputReceiver : inputReceivers) {
+                inputReceiver.receive(key, scancode, action, mods);
+            }
+        });
 
         GL.createCapabilities();
 
@@ -131,11 +143,12 @@ public class Window {
         }
     }
 
+    public Vector2f cameraPosition = new Vector2f(0, 0);
+
     private void loop(){
         float beginTime = Time.getTime();
         float endTime;
         float dt = -1.0f;
-        float last = 0;
         glEnable(GL_TEXTURE_2D);
         while (!glfwWindowShouldClose(windowHandle)){
             // Poll events
@@ -156,6 +169,10 @@ public class Window {
                 currentScene.render();
             }
 
+            glMatrixMode(GL_PROJECTION);
+            glLoadIdentity();
+            glOrtho(0+cameraPosition.x, width+cameraPosition.x, height+cameraPosition.y, 0+cameraPosition.y, 1, -1);
+            glMatrixMode(GL_MODELVIEW);
 
             glfwSwapBuffers(windowHandle);
 
@@ -164,5 +181,9 @@ public class Window {
             beginTime = endTime;
         }
     }
+    private final ArrayList<InputReceiver> inputReceivers = new ArrayList<>();
 
+    public void addInputReceiver(InputReceiver inputReceiver) {
+        inputReceivers.add(inputReceiver);
+    }
 }

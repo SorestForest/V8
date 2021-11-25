@@ -1,5 +1,8 @@
 package ru.REStudios.v8.graphics;
 
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
+
 import java.io.IOException;
 
 /**
@@ -7,10 +10,17 @@ import java.io.IOException;
  *
  * @author REStudios
  */
-public abstract class Scene {
+public abstract class Scene  {
 
+    public World world;
 
-    public abstract void update(double dt);
+    public Scene(){
+        world = new World(new Vector2(0f, 98f), true);
+    }
+
+    public void update(double dt){
+        world.step((float) dt, 6, 2);
+    }
 
     public abstract void render();
 

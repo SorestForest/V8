@@ -15,6 +15,10 @@ public class Transform extends Component {
     public Vector2f size;
     public float angle;
 
+    public Transform(){
+        this(new Vector2f(0, 0));
+    }
+
     public Transform(Vector2f position){
         this(position,new Vector2f(0,0),0);
     }

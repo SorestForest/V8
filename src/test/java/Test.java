@@ -16,19 +16,16 @@ public class Test {
         Log4jPrintStream.setupPrints();
         Window window = Window.setup(600,600,false,"hi");
         Scene scene = new Scene() {
-
             TestGameObject gameObject;
-
             @Override
             public void update(double dt) {
+                super.update(dt);
                 gameObject.update(dt);
             }
-
             @Override
             public void render() {
                 gameObject.render();
             }
-
             @Override
             public void init() throws IOException {
                 System.out.println("Loading!");
@@ -38,11 +35,7 @@ public class Test {
         };
         Window.setScene(scene);
         window.run();
-        while (!window.shouldClose()){
-            int i = 0;
-            i += 1;
-            ;
-        }
+        window.waitFor();
         window.destroy();
         System.out.println("Destroyed!");
     }

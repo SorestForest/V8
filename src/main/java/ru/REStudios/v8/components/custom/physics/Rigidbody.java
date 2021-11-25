@@ -1,29 +1,36 @@
 package ru.REStudios.v8.components.custom.physics;
 
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import org.joml.Vector2f;
 import ru.REStudios.v8.components.Component;
-import ru.REStudios.v8.components.custom.Transform;
-import ru.REStudios.v8.math.Physic;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class Rigidbody extends Component {
     // PHYSICS
-
-    double m = 0.00005;
 
     public Rigidbody() {
         super();
         requiredComponent(Collider.class);
     }
 
-    public double getMass() {
-        return m;
+    public float getMass() {
+        return parent.body.getMass();
     }
 
-    public void setMass(double m) {
-        this.m = m;
+    public void setMass(float m) {
+        parent.body.getMassData().mass = m;
+    }
+
+    // setGravity(1) is default
+    public void setGravity(float g){
+        parent.body.setGravityScale(g);
+
+    }
+
+    public float getGravity(){
+        return parent.body.getGravityScale();
     }
 
     @Override
@@ -33,13 +40,8 @@ public class Rigidbody extends Component {
 
     @Override
     public void update(double dt) {
-        Physic.F f = new Physic.F(m);
-        Vector2f position = new Vector2f(parent.getTransform().position);
-        // ATTRACTION
-        position.add(f.getDirection().mul(new Vector2f((float)f.getImpulse(), (float)f.getImpulse())).mul(1, -1));
-
-
-        ((Transform) Objects.requireNonNull(parent.getComponent(Transform.class))).position = position;
+        Vector2 vec = parent.body.getPosition();
+        parent.getTransform().position = new Vector2f(vec.x, vec.y);
 
     }
 
@@ -47,7 +49,11 @@ public class Rigidbody extends Component {
     public void init() throws IOException {
 
     }
-    protected void impulse(){
-
+    public void impulse(Vector2f impulse){
+        Body body = parent.body;
+        body.applyLinearImpulse(toVector2(impulse), body.getPosition().cpy().add(body.getLocalCenter()), true);
+    }
+    private Vector2 toVector2(Vector2f vec){
+        return new Vector2(vec.x, vec.y);
     }
 }

@@ -1,6 +1,5 @@
 package ru.REStudios.v8.components.custom.physics;
 
-import ru.REStudios.v8.components.Component;
 import ru.REStudios.v8.components.GameObject;
 
 import java.io.IOException;
