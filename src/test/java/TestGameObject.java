@@ -6,6 +6,7 @@ import ru.REStudios.v8.components.custom.Transform;
 import ru.REStudios.v8.components.custom.graphics.Sprite;
 import ru.REStudios.v8.components.custom.physics.Collider;
 import ru.REStudios.v8.components.custom.physics.Rigidbody;
+import ru.REStudios.v8.input.Input;
 
 import java.io.IOException;
 
@@ -23,10 +24,11 @@ public class TestGameObject extends GameObject {
         getComponent(Transform.class).size = new Vector2f(1000, 1000);
         addComponent(new Sprite("v8.png"));
         addComponent(new Rigidbody());
+
         addComponent(new CallbackReceiver(){
             @Override
             public void key(int key, int scancode, int action, int mods) {
-                if(key == GLFW.GLFW_KEY_W){
+                if(key == Input.KEY_W){
                     getComponent(Rigidbody.class).impulse(new Vector2f(0, -100));
                 }
             }

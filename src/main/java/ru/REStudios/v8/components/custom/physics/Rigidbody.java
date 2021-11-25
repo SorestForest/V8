@@ -2,6 +2,7 @@ package ru.REStudios.v8.components.custom.physics;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.World;
 import org.joml.Vector2f;
 import ru.REStudios.v8.components.Component;
 
@@ -28,15 +29,14 @@ public class Rigidbody extends Component {
         parent.body.setGravityScale(g);
 
     }
+    public float getInertia(){return parent.body.getInertia();}
+    public World getWorld(){return parent.body.getWorld();}
 
     public float getGravity(){
         return parent.body.getGravityScale();
     }
 
-    @Override
-    public void render() {
 
-    }
 
     @Override
     public void update(double dt) {

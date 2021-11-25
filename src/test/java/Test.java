@@ -40,7 +40,6 @@ public class Test {
             }
             @Override
             public void init() throws IOException {
-                System.out.println("Loading!");
                 gameObject = addGameObject(new TestGameObject());
                 //shader = new Shader("default.vert","default.frag");
                 //shader.compile();

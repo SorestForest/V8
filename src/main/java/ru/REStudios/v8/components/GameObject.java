@@ -65,6 +65,7 @@ public abstract class GameObject {
 
         fixtureDef.density = 1f;
         Fixture fixture = body.createFixture(fixtureDef);
+        body.setUserData(this);
         for (Component component : components) {
             component.init();
         }

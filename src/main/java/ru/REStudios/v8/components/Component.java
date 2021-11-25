@@ -25,7 +25,7 @@ public abstract class Component {
 
     protected boolean enabled = true;
 
-    public abstract void render();
+    public void render(){}
 
     public abstract void update(double dt);
 
