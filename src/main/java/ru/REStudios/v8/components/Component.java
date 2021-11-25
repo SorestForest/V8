@@ -35,7 +35,7 @@ public abstract class Component {
 
     public Component enable(){ enabled = true; return this;}
 
-    public final void requiredComponent(Class<? extends Component> component){
+    protected final void requiredComponent(Class<? extends Component> component){
         dependencies.add(component);
     }
 
