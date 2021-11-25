@@ -1,17 +1,13 @@
 import org.joml.Vector2f;
 import org.lwjgl.glfw.GLFW;
-import org.lwjgl.opengl.GL;
 import ru.REStudios.v8.components.GameObject;
 import ru.REStudios.v8.components.custom.InputReceiver;
-import ru.REStudios.v8.components.custom.Sprite;
 import ru.REStudios.v8.components.custom.Transform;
 import ru.REStudios.v8.components.custom.graphics.Sprite;
-import ru.REStudios.v8.components.custom.physics.BoxCollider;
 import ru.REStudios.v8.components.custom.physics.Collider;
 import ru.REStudios.v8.components.custom.physics.Rigidbody;
 
 import java.io.IOException;
-import java.util.Objects;
 
 /**
  * (C) Copyright REStudios 2021

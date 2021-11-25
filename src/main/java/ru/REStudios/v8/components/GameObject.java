@@ -36,7 +36,7 @@ public abstract class GameObject {
     }
 
     @SuppressWarnings("unchecked")
-    public <T> T getComponent(Class<? extends T> clazz){
+    public <T extends Component> T getComponent(Class<? extends T> clazz){
         for (Component component : components) {
             if (component.getClass().isAssignableFrom(clazz)){
                 return Objects.requireNonNull((T) component);
@@ -61,7 +61,7 @@ public abstract class GameObject {
         bodyDef.position.set(new Vector2(getComponent(Transform.class).position.x, getComponent(Transform.class).position.y));
         body = world.createBody(bodyDef);
         FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.shape = getComponent(Collider.class).asPolygon();
+        fixtureDef.shape = new PolygonShape(){{setAsBox(1, 1);}};
 
         fixtureDef.density = 1f;
         Fixture fixture = body.createFixture(fixtureDef);

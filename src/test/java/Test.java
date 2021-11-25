@@ -27,15 +27,14 @@ public class Test {
             public void update(double dt) {
                 super.update(dt);
                 gameObject.update(dt);
-
             }
 
 
             @Override
             public void render() {
-                shader.use();
-                shader.uploadMat4f("uProjection", Objects.requireNonNull(findCamera()).getProjectionMatrix());
-                shader.uploadMat4f("uView", Objects.requireNonNull(findCamera()).getViewMatrix());
+                ///shader.use();
+                //shader.uploadMat4f("uProjection", Objects.requireNonNull(findCamera()).getProjectionMatrix());
+                //shader.uploadMat4f("uView", Objects.requireNonNull(findCamera()).getViewMatrix());
                 gameObject.render();
 
             }
@@ -43,8 +42,8 @@ public class Test {
             public void init() throws IOException {
                 System.out.println("Loading!");
                 gameObject = addGameObject(new TestGameObject());
-                shader = new Shader("default.vert","default.frag");
-                shader.compile();
+                //shader = new Shader("default.vert","default.frag");
+                //shader.compile();
                 camera = addGameObject(new CameraObject());
             }
         };
