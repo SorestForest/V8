@@ -1,7 +1,7 @@
 import org.joml.Vector2f;
 import org.lwjgl.glfw.GLFW;
 import ru.REStudios.v8.components.GameObject;
-import ru.REStudios.v8.components.custom.InputReceiver;
+import ru.REStudios.v8.components.custom.CallbackReceiver;
 import ru.REStudios.v8.components.custom.Transform;
 import ru.REStudios.v8.components.custom.graphics.Sprite;
 import ru.REStudios.v8.components.custom.physics.Collider;
@@ -23,9 +23,9 @@ public class TestGameObject extends GameObject {
         getComponent(Transform.class).size = new Vector2f(1000, 1000);
         addComponent(new Sprite("v8.png"));
         addComponent(new Rigidbody());
-        addComponent(new InputReceiver(){
+        addComponent(new CallbackReceiver(){
             @Override
-            public void receive(int key, int scancode, int action, int mods) {
+            public void key(int key, int scancode, int action, int mods) {
                 if(key == GLFW.GLFW_KEY_W){
                     getComponent(Rigidbody.class).impulse(new Vector2f(0, -100));
                 }

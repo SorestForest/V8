@@ -1,12 +1,17 @@
 package ru.REStudios.v8.graphics;
 
+import org.joml.Vector2d;
 import org.joml.Vector2f;
+import org.joml.Vector2i;
 import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.GLFWImage;
 import org.lwjgl.opengl.GL;
-import ru.REStudios.v8.components.custom.InputReceiver;
+import ru.REStudios.v8.components.custom.CallbackReceiver;
 import ru.REStudios.v8.utils.Time;
 
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -106,29 +111,15 @@ public class Window {
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
-
-        // Create window
         windowHandle = glfwCreateWindow(this.width, this.height, title, NULL, NULL);
         if (windowHandle == NULL) {
             throw new IllegalStateException("Failed to create the GLFW window.");
         }
-
-        // Make the OpenGL context current
         glfwMakeContextCurrent(windowHandle);
-        // Enable v-sync
         glfwSwapInterval(vsync ? 1 : 0);
-
-        // Make the window visible
         glfwShowWindow(windowHandle);
-
-        glfwSetKeyCallback(windowHandle, (long window, int key, int scancode, int action, int mods) -> {
-            for (InputReceiver inputReceiver : inputReceivers) {
-                inputReceiver.receive(key, scancode, action, mods);
-            }
-        });
-
+        events();
         GL.createCapabilities();
-
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
         Vector2f position = new Vector2f(10, 10);
@@ -144,6 +135,21 @@ public class Window {
     }
 
     public Vector2f cameraPosition = new Vector2f(0, 0);
+
+
+    public void setCursorPosition(Vector2f position){glfwSetCursorPos(windowHandle, position.x, position.y);}
+    public void hideCursor(){glfwSetInputMode(windowHandle, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);}
+    public void showCursor(){glfwSetInputMode(windowHandle, GLFW_CURSOR, GLFW_CURSOR_NORMAL);}
+    public void setClipboard(String string){glfwSetClipboardString(windowHandle, string);}
+    public String getClipboard(){return glfwGetClipboardString(windowHandle);}
+    public void setWindowPosition(Vector2i position){glfwSetWindowPos(windowHandle, position.x,position.y);}
+    public Vector2f getWindowPosition(){IntBuffer x = IntBuffer.allocate(1 << 2), y = IntBuffer.allocate(1 << 2);glfwGetWindowPos(windowHandle, x, y);return new Vector2f(x.get(), y.get());}
+    public void setWindowTitle(String title){glfwSetWindowTitle(windowHandle, title);}
+    public void showWindow(){glfwShowWindow(windowHandle);}
+    public void hideWindow(){glfwHideWindow(windowHandle);}
+    public void enableVsync(){glfwSwapInterval(1);}
+    public void disableVsync(){glfwSwapInterval(0);}
+
 
     private void loop(){
         float beginTime = Time.getTime();
@@ -181,9 +187,60 @@ public class Window {
             beginTime = endTime;
         }
     }
-    private final ArrayList<InputReceiver> inputReceivers = new ArrayList<>();
+    private final ArrayList<CallbackReceiver> callbackReceivers = new ArrayList<>();
 
-    public void addInputReceiver(InputReceiver inputReceiver) {
-        inputReceivers.add(inputReceiver);
+    public void addInputReceiver(CallbackReceiver callbackReceiver) {
+        callbackReceivers.add(callbackReceiver);
+    }
+
+    private void events(){
+        glfwSetKeyCallback(windowHandle, (long window, int key, int scancode, int action, int mods) -> {
+            for (CallbackReceiver callbackReceiver : callbackReceivers) {
+                callbackReceiver.key(key, scancode, action, mods);
+            }
+        });
+
+        glfwSetMouseButtonCallback(windowHandle, (final long window, final int button, final int action, final int mods) -> {
+            for (CallbackReceiver callbackReceiver : callbackReceivers) {
+                callbackReceiver.mouse(button, action, mods);
+            }
+        });
+        glfwSetWindowFocusCallback(windowHandle, (l, b) -> {
+            if(b){
+                for (CallbackReceiver callbackReceiver : callbackReceivers) {
+                    callbackReceiver.window_focus();
+                }
+            }else{
+                for (CallbackReceiver callbackReceiver : callbackReceivers) {
+                    callbackReceiver.window_unfocus();
+                }
+            }
+        });
+        glfwSetCursorEnterCallback(windowHandle, (l, b) -> {
+            if(b){
+                for (CallbackReceiver callbackReceiver : callbackReceivers) {
+                    callbackReceiver.mouse_window_enter();
+                }
+            }else{
+                for (CallbackReceiver callbackReceiver : callbackReceivers) {
+                    callbackReceiver.mouse_window_exit();
+                }
+            }
+        });
+        glfwSetWindowPosCallback(windowHandle, (l, i, i1) -> {
+            for (CallbackReceiver callbackReceiver : callbackReceivers) {
+                callbackReceiver.window_position(new Vector2i(i, i1));
+            }
+        });
+        glfwSetWindowSizeCallback(windowHandle, (l, i, i1) -> {
+            for (CallbackReceiver callbackReceiver : callbackReceivers) {
+                callbackReceiver.window_size(new Vector2i(i, i1));
+            }
+        });
+        glfwSetScrollCallback(windowHandle, (l, v, v1) -> {
+            for (CallbackReceiver callbackReceiver : callbackReceivers) {
+                callbackReceiver.mouse_scroll(new Vector2d(v, v1));
+            }
+        });
     }
 }
