@@ -24,7 +24,8 @@ public class Rigidbody extends Component {
         parent.body.getMassData().mass = m;
     }
 
-    // setGravity(1) is default
+    // setGravity(1) стандарт
+    // Это всего лишь коэфициент.
     public void setGravity(float g){
         parent.body.setGravityScale(g);
 
@@ -42,7 +43,6 @@ public class Rigidbody extends Component {
     public void update(double dt) {
         Vector2 vec = parent.body.getPosition();
         parent.getTransform().position = new Vector2f(vec.x, vec.y);
-
     }
 
     @Override

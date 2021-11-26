@@ -27,6 +27,7 @@ public class REUtils {
 
 
 
+    @SafeVarargs
     public static <T> Collection<T> removeAll(Collection<T> collection, T... toRemove){
         ArrayList<T> out = new ArrayList<>();
         ArrayList<T> remove = new ArrayList<>(Arrays.asList(toRemove));

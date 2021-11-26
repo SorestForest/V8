@@ -1,7 +1,6 @@
 import org.joml.Vector2f;
-import org.lwjgl.glfw.GLFW;
 import ru.REStudios.v8.components.GameObject;
-import ru.REStudios.v8.components.custom.CallbackReceiver;
+import ru.REStudios.v8.components.custom.input.CallbackReceiver;
 import ru.REStudios.v8.components.custom.Transform;
 import ru.REStudios.v8.components.custom.graphics.Sprite;
 import ru.REStudios.v8.components.custom.physics.Collider;
