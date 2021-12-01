@@ -10,7 +10,7 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL30.glGenerateMipmap;
 import static org.lwjgl.stb.STBImage.stbi_load_from_memory;
 import static org.lwjgl.system.MemoryStack.stackPush;
-import static ru.REStudios.v8.utils.IOUtils.ioResourceToByteBuffer;
+import static ru.REStudios.v8.IOUtils.ioResourceToByteBuffer;
 
 /**
  * (C) Copyright REStudios 2021

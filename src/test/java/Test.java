@@ -1,10 +1,9 @@
 import ru.REStudios.v8.graphics.Scene;
 import ru.REStudios.v8.graphics.Shader;
 import ru.REStudios.v8.graphics.Window;
-import ru.REStudios.v8.utils.Log4jPrintStream;
+import ru.REStudios.v8.utils.oop.REPrintStream;
 
 import java.io.IOException;
-import java.util.Objects;
 
 /**
  * (C) Copyright REStudios 2021
@@ -15,7 +14,7 @@ public class Test {
 
 
     public static void main(String[] args) {
-        Log4jPrintStream.setupPrints();
+        REPrintStream.setupPrints();
         Window window = Window.setup(1000,800,false,"hi");
         Scene scene = new Scene() {
             TestGameObject gameObject;

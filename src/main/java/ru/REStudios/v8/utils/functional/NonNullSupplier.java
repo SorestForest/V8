@@ -1,13 +1,16 @@
-package ru.REStudios.v8.utils;
+package ru.REStudios.v8.utils.functional;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.function.Supplier;
 
 /**
  * (C) Copyright REStudios 2021
  *
  * @author REStudios
  */
-public interface NonNullSupplier<T> {
+@SuppressWarnings("unused")
+public interface NonNullSupplier<T> extends Supplier<T> {
 
     /**
      * Simple supplier method

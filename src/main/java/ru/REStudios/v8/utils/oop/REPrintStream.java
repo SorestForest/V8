@@ -1,16 +1,24 @@
-package ru.REStudios.v8.utils;
+package ru.REStudios.v8.utils.oop;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.PrintStream;
 
-public class Log4jPrintStream extends PrintStream implements Thread.UncaughtExceptionHandler {
+/**
+ * (C) Copyright REStudios 2021
+ *
+ *
+ * Simple debug console system
+ * @see PrintStream
+ */
+
+public class REPrintStream extends PrintStream implements Thread.UncaughtExceptionHandler {
 
     public boolean isErrorStream = false;
     private final PrintStream original;
 
-    public Log4jPrintStream(PrintStream stream) {
+    public REPrintStream(PrintStream stream) {
         super(stream);
         original = stream;
     }
@@ -80,9 +88,12 @@ public class Log4jPrintStream extends PrintStream implements Thread.UncaughtExce
         add = 0;
     }
 
+    /**
+     * Default setup
+     */
     public static void setupPrints() {
-        System.setOut(new Log4jPrintStream(System.out));
-        Log4jPrintStream stream = new Log4jPrintStream(System.err);
+        System.setOut(new REPrintStream(System.out));
+        REPrintStream stream = new REPrintStream(System.err);
         stream.isErrorStream = true;
         System.setErr(stream);
         Thread.currentThread().setUncaughtExceptionHandler(stream);

@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * (C) Copyright REStudios 2021
- *
+ *  Simple file operator
  * @author SorestForest
  */
 @SuppressWarnings("unused")
@@ -47,7 +47,7 @@ public class FileHandle {
         File file = new File(unknownPath);
         if (!file.exists()){
             try {
-                System.out.println(unknownPath);
+                System.err.println(unknownPath);
                 throw new FileNotFoundException("We can't do anything with unknown file!");
             } catch (FileNotFoundException e){
                 e.printStackTrace();
@@ -103,6 +103,19 @@ public class FileHandle {
      */
     public String[] readAllLines() throws IOException {
         return readAsString().split("\n");
+    }
+
+    /**
+     * Streams file
+     * @return stream
+     */
+    public FileInputStream fileStream(){
+        try {
+            return new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**

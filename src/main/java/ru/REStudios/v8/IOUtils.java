@@ -1,4 +1,4 @@
-package ru.REStudios.v8.utils;
+package ru.REStudios.v8;
 
 import java.io.IOException;
 import java.io.InputStream;

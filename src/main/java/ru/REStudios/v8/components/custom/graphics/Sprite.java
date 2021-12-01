@@ -3,7 +3,7 @@ package ru.REStudios.v8.components.custom.graphics;
 import ru.REStudios.v8.components.Component;
 import ru.REStudios.v8.graphics.Renderer;
 import ru.REStudios.v8.graphics.Texture;
-import ru.REStudios.v8.utils.files.ResourceLoader;
+import ru.REStudios.v8.ResourceLoader;
 
 import java.io.IOException;
 
