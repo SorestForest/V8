@@ -7,7 +7,7 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 import ru.REStudios.v8.components.custom.input.IReceiver;
-import ru.REStudios.v8.utils.Time;
+import ru.REStudios.utils.Time;
 
 import java.io.IOException;
 import java.nio.DoubleBuffer;

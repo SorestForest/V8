@@ -2,7 +2,7 @@ package ru.REStudios.v8.graphics;
 
 import org.joml.*;
 import org.lwjgl.BufferUtils;
-import ru.REStudios.v8.utils.files.FileHandle;
+import ru.REStudios.utils.files.FileHandle;
 
 import java.io.IOException;
 import java.nio.FloatBuffer;
@@ -25,8 +25,8 @@ public class Shader {
         this.vertexFile = vertexFile;
         this.fragmentFile = fragmentFile;
         try {
-            vertexSource = new FileHandle("shaders/"+vertexFile).readAsString();
-            fragmentSource = new FileHandle("shaders/"+fragmentFile).readAsString();
+            vertexSource = new FileHandle("shaders/"+vertexFile).readUTF8();
+            fragmentSource = new FileHandle("shaders/"+fragmentFile).readUTF8();
         } catch(IOException e) {
             e.printStackTrace();
             assert false : "Error: Could not open file for shader: '" + fragmentFile + "' or '"+vertexFile+"'";

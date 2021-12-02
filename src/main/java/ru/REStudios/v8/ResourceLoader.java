@@ -1,7 +1,7 @@
 package ru.REStudios.v8;
 
 import ru.REStudios.v8.graphics.Texture;
-import ru.REStudios.v8.utils.files.FileHandle;
+import ru.REStudios.utils.files.FileHandle;
 
 import java.io.IOException;
 import java.util.HashMap;

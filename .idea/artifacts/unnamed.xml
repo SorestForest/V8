@@ -1,0 +1,24 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="unnamed">
+    <output-path>$PROJECT_DIR$/out/artifacts/unnamed</output-path>
+    <root id="archive" name="unnamed.jar">
+      <element id="module-output" name="SFMLNative" />
+      <element id="library" level="project" name="Maven: com.google.collections:google-collections:1.0" />
+      <element id="library" level="project" name="Maven: com.badlogicgames.gdx:gdx-box2d-platform:natives-desktop:1.10.0" />
+      <element id="library" level="project" name="Maven: com.badlogicgames.gdx:gdx-box2d:1.10.0" />
+      <element id="library" level="project" name="Maven: com.badlogicgames.gdx:gdx:1.10.0" />
+      <element id="library" level="project" name="Maven: org.jetbrains:annotations:22.0.0" />
+      <element id="library" level="project" name="Maven: org.joml:joml:1.10.2" />
+      <element id="library" level="project" name="Maven: org.lwjgl:lwjgl-bgfx:3.3.0" />
+      <element id="library" level="project" name="Maven: org.lwjgl:lwjgl-bgfx:natives-windows:3.3.0" />
+      <element id="library" level="project" name="Maven: org.lwjgl:lwjgl-glfw:3.3.0" />
+      <element id="library" level="project" name="Maven: org.lwjgl:lwjgl-glfw:natives-windows:3.3.0" />
+      <element id="library" level="project" name="Maven: org.lwjgl:lwjgl-opengl:3.3.0" />
+      <element id="library" level="project" name="Maven: org.lwjgl:lwjgl-opengl:natives-windows:3.3.0" />
+      <element id="library" level="project" name="Maven: org.lwjgl:lwjgl-stb:3.3.0" />
+      <element id="library" level="project" name="Maven: org.lwjgl:lwjgl-stb:natives-windows:3.3.0" />
+      <element id="library" level="project" name="Maven: org.lwjgl:lwjgl:3.3.0" />
+      <element id="library" level="project" name="Maven: org.lwjgl:lwjgl:natives-windows:3.3.0" />
+    </root>
+  </artifact>
+</component>

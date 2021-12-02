@@ -1,7 +1,7 @@
 import ru.REStudios.v8.graphics.Scene;
 import ru.REStudios.v8.graphics.Shader;
 import ru.REStudios.v8.graphics.Window;
-import ru.REStudios.v8.utils.oop.REPrintStream;
+import ru.REStudios.utils.oop.REPrintStream;
 
 import java.io.IOException;
 
